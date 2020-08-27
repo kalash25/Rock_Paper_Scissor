@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>Rock Paper Scissor</Title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Rock Paper Scissor Game</h1>
+        <script>
+            //Randomly returns rock paper or scissor
+            function computerPlay(){
+                let a = Math.floor(3*Math.random());
+                let computerChoice;
+                switch(a)
+                {
+                    case 0:
+                        computerChoice="Rock";
+                        break;
+                    case 1:
+                        computerChoice="Paper";
+                        break;
+                    case 2:
+                        computerChoice="Scissor";
+                        break;
+                }
+                //console.log(computerChoice)
+                return computerChoice;
+            }
+
+            //Single Round of RPS
+            function playRound(playerSelection,computerSelection){
+                if(playerSelection.toUpperCase() == computerSelection.toUpperCase())
+                {
+                    console.log("TIE");
+                    return;
+                }
+                let winner = false;
+                // to check if the player is the winner or not
+                if(computerSelection.toUpperCase() == "ROCK")
+                {
+                    if(playerSelection.toUpperCase() == "PAPER")
+                    {
+                        winner = true;
+                    }
+                }
+                else if(computerSelection.toUpperCase() == "PAPER")
+                {
+                    if(playerSelection.toUpperCase() == "SCISSOR")
+                    {
+                        winner = true;
+                    }
+                }
+                else if(computerSelection.toUpperCase() == "SCISSOR")
+                {
+                    if(playerSelection.toUpperCase() == "ROCK")
+                    {
+                        winner = true;
+                    }
+                }
+                displayWinner(winner,computerSelection,playerSelection);
+            }
+
+            //To display the winner
+            function displayWinner(won,computer,player)
+            {
+                if(won == true)
+                {
+                    console.log("you won! " + player.toUpperCase() + " beats " + computer.toUpperCase());
+                }
+                else
+                {
+                    console.log("you lost! " + computer.toUpperCase() + " beats " + player.toUpperCase());
+                }
+            }
+
+            // To take input from user
+            function input()
+            {
+                let string = prompt("Enter an option")
+                let temp = string.toUpperCase();
+                if(temp == "ROCK" || temp == "PAPER" || temp == "SCISSOR" )
+                {
+                    return string;
+                }
+                else
+                {
+                    console.log("Please enter valid entry");
+                    temp = input();
+                    return temp;
+                }
+            }
+
+            // To actually play the game
+            function game(){
+                let computerChoice=computerPlay();
+                let playerChoice=input();
+                playRound(playerChoice,computerChoice);
+            }
+            
+            // Main file
+            for(let i=0;i<5;i++){
+                game();
+            }
+        </script>
+    </body>
+</html>
